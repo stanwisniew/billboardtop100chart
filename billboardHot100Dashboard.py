@@ -9,7 +9,7 @@ from dash.dependencies import Input, Output
 #data pd
 #---------------------------------
 
-df=pd.read_csv("/home/stanislaw/Dane/DataAnalysisSets/hot-100-current.csv")
+df=pd.read_csv("hot-100-current.csv")
 
 
 
