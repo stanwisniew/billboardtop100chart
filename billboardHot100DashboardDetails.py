@@ -19,7 +19,7 @@ df['Year'] = pd.to_datetime(df['chart_week']).dt.year  # Create Year column
 no1_performers = df[df["peak_pos"] == 1].groupby("performer").agg(
     number_of_no1_hits=('peak_pos', 'size'),
     max_weeks_on_chart=('wks_on_chart', 'max'), 
-    Year=('Year', 'first')  # Retrieve the first year for that performer
+    Year=('Year', 'first') 
 ).reset_index()
 
 #interactive with Dash
