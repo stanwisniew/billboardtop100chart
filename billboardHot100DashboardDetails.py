@@ -12,10 +12,10 @@ from dash.dependencies import Input, Output
 df=pd.read_csv("/home/stanislaw/Dane/DataAnalysisSets/hot-100-current.csv")
 
 
-# Assuming df is already defined and contains a 'chart_week' column in the YYYY-MM-DD format
+
 df['Year'] = pd.to_datetime(df['chart_week']).dt.year  # Create Year column
 
-# Now you can proceed with your filtering and aggregation
+
 no1_performers = df[df["peak_pos"] == 1].groupby("performer").agg(
     number_of_no1_hits=('peak_pos', 'size'),
     max_weeks_on_chart=('wks_on_chart', 'max'), 
@@ -63,7 +63,7 @@ def update_details_graph(clickData):
 
     performer_name = clickData['points'][0]['x']
     
-    # Get details for the selected performer
+    
     performer_details = df[df['performer'] == performer_name]
     
     # Use max to get the highest number of weeks on chart for each song
@@ -82,12 +82,12 @@ def update_details_graph(clickData):
         title=f"Details for {performer_name}",
         labels={
             "max_weeks_on_chart": "Number of Weeks on Charts",  # Change display name for the y-axis
-            "title": "Song Title",  # Change display name for the x-axis if needed
+            "title": "Song Title",  # Change display name for the x-axis
             "wks_on_chart": "Weeks on Chart",
             "peak_pos": "Peaked on number: ",
         },
         color='peak_pos',
-        color_continuous_scale=px.colors.sequential.Viridis,  # Change the color scale here
+        color_continuous_scale=px.colors.sequential.Viridis,  # Change the color scale 
         color_discrete_sequence=["red", "orange", "yellow", "green", "blue", "purple"],  # Custom colors
         hover_name='title',  # Specify the name to be displayed in hover
         hover_data={
@@ -99,10 +99,10 @@ def update_details_graph(clickData):
                                             '<b>Weeks on Chart</b>: %{y}<br>' +
                                             '<b>Peaked on number</b>: %{customdata}<extra></extra>',
                                hovertext=performer_details_max['title'],
-                               customdata=performer_details_max['peak_pos'])  # Add peak_pos as custom data
+                               customdata=performer_details_max['peak_pos'])  # customdata
 
     
-    return details_fig  # Return the details figure
+    return details_fig  #
 
 
 if __name__ == "__main__":
